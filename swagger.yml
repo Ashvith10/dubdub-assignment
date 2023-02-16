@@ -1,0 +1,113 @@
+---
+openapi: 3.0.0
+info:
+  title: DubDub Assignment
+  description: An API about todo lists
+  version: 1.0.0
+servers:
+  - url: /api/v1
+components:
+  schemas:
+    EditTodo:
+      type: object
+      required: [text, completed]
+      properties:
+        text:
+          type: string
+        completed:
+          type: boolean
+    EditTodoText:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+    EditTodoStatus:
+      type: object
+      required: [completed]
+      properties:
+        completed:
+          type: boolean
+  parameters:
+    id:
+      name: id
+      description: ID of the todo list
+      in: path
+      required: true
+      schema:
+        type: integer
+paths:
+  /todo:
+    get:
+      operationId: view.index
+      tags: [People]
+      summary: Read all the todos
+      responses:
+        '200':
+          description: Successfully read todo lists
+    post:
+      operationId: view.create
+      tags: [People]
+      summary: Create a todo list
+      requestBody:
+        description: Todo to create
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: todo
+              $ref: '#/components/schemas/EditTodo'
+      responses:
+        '201':
+          description: Successfully created a todo list
+  /todo/{id}:
+    get:
+      operationId: view.show
+      tags: [People]
+      summary: Read selected todo
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successfully read todo list
+    delete:
+      operationId: view.delete
+      tags: [People]
+      summary: Deleted selected todo
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Successfully deleted todo list
+  /todo/{id}/update_text:
+    put:
+      operationId: view.update_text
+      tags: [People]
+      summary: Update todo text
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successfully updated todo list text
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: todo
+              $ref: '#/components/schemas/EditTodoText'
+  /todo/{id}/update_status:
+    put:
+      operationId: view.update_status
+      tags: [People]
+      summary: Update todo status
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successfully updated todo list status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: todo
+              $ref: '#/components/schemas/EditTodoStatus'
