@@ -31,12 +31,12 @@ pipenv run flask run
 
 |Verb  |Route                            |Description       |
 |------|---------------------------------|------------------|
-|GET   |`/api/v1/todo`                   |Read all the todos|
-|POST  |`/api/v1/todo`                   |Create a new todo |
-|DELETE|`/api/v1/todo/{id}`              |Delete a todo     |
-|GET   |`/api/v1/todo/{id}`              |Read a todo       |
-|PUT   |`/api/v1/todo/{id}/update_status`|Update todo status|
-|PUT   |`/api/v1/todo/{id}/update_text`  |Update todo text  |
+|GET   |`/api/v1/task`                   |Read all the tasks|
+|POST  |`/api/v1/task`                   |Create a new task |
+|DELETE|`/api/v1/task/{id}`              |Delete a task     |
+|GET   |`/api/v1/task/{id}`              |Read a task       |
+|PUT   |`/api/v1/task/{id}/update_status`|Update task status|
+|PUT   |`/api/v1/task/{id}/update_text`  |Update task text  |
 
 ## Accessing endpoints
 This can be done in two ways:
