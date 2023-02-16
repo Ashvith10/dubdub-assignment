@@ -5,12 +5,17 @@ volumes:
 services:
   app:
     container_name: flask
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on: [db]
     ports: [5000:5000]
     environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN=5000
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
-    command: pipenv run flask run --host=0.0.0.0 --port=5000
+    command: pipenv run flask run
   db:
     container_name: postgres
     image: postgres:15.1
