@@ -1,3 +1,4 @@
+import os
 import connexion
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -7,7 +8,7 @@ from schema import ma
 connex_app = connexion.App(__name__)
 connex_app.add_api('swagger.yml')
 app = connex_app.app
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5432/dubdub-assignment'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 def validate_database():
