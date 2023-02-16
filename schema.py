@@ -1,12 +1,12 @@
 from flask_marshmallow import Marshmallow
-from model import Todo, db
+from model import Task, db
 ma = Marshmallow()
 
-class TodoSchema(ma.SQLAlchemyAutoSchema):
+class TaskSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Todo
+        model = Task
         load_instance = True
         sqla_session = db.session
 
-todo_schema = TodoSchema()
-todos_schema = TodoSchema(many=True)
+task_schema = TaskSchema()
+tasks_schema = TaskSchema(many=True)

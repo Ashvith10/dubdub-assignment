@@ -1,14 +1,14 @@
 ---
 openapi: 3.0.0
 info:
-  title: DubDub Assignment
-  description: An API about todo lists
+  title: To-do list application
+  description: An API about managing taska
   version: 1.0.0
 servers:
   - url: /api/v1
 components:
   schemas:
-    EditTodo:
+    EditTask:
       type: object
       required: [text, completed]
       properties:
@@ -16,13 +16,13 @@ components:
           type: string
         completed:
           type: boolean
-    EditTodoText:
+    EditTaskText:
       type: object
       required: [text]
       properties:
         text:
           type: string
-    EditTodoStatus:
+    EditTaskStatus:
       type: object
       required: [completed]
       properties:
@@ -31,83 +31,83 @@ components:
   parameters:
     id:
       name: id
-      description: ID of the todo list
+      description: ID of the task
       in: path
       required: true
       schema:
         type: integer
 paths:
-  /todo:
+  /task:
     get:
       operationId: view.index
       tags: [People]
-      summary: Read all the todos
+      summary: Read all the tasks
       responses:
         '200':
-          description: Successfully read todo lists
+          description: Successfully read tasks
     post:
       operationId: view.create
       tags: [People]
-      summary: Create a todo list
+      summary: Create a task
       requestBody:
-        description: Todo to create
+        description: Task to create
         required: true
         content:
           application/json:
             schema:
-              x-body-name: todo
-              $ref: '#/components/schemas/EditTodo'
+              x-body-name: task
+              $ref: '#/components/schemas/EditTask'
       responses:
         '201':
-          description: Successfully created a todo list
-  /todo/{id}:
+          description: Successfully created a task
+  /task/{id}:
     get:
       operationId: view.show
       tags: [People]
-      summary: Read selected todo
+      summary: Read selected task
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
         '200':
-          description: Successfully read todo list
+          description: Successfully read task
     delete:
       operationId: view.delete
       tags: [People]
-      summary: Deleted selected todo
+      summary: Delete selected task
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
         '204':
-          description: Successfully deleted todo list
-  /todo/{id}/update_text:
+          description: Successfully deleted task
+  /task/{id}/update_text:
     put:
       operationId: view.update_text
       tags: [People]
-      summary: Update todo text
+      summary: Update selected task text
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
         '200':
-          description: Successfully updated todo list text
+          description: Successfully updated task text
       requestBody:
         content:
           application/json:
             schema:
-              x-body-name: todo
-              $ref: '#/components/schemas/EditTodoText'
-  /todo/{id}/update_status:
+              x-body-name: task
+              $ref: '#/components/schemas/EditTaskText'
+  /task/{id}/update_status:
     put:
       operationId: view.update_status
       tags: [People]
-      summary: Update todo status
+      summary: Update selected task status
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
         '200':
-          description: Successfully updated todo list status
+          description: Successfully updated task list status
       requestBody:
         content:
           application/json:
             schema:
-              x-body-name: todo
-              $ref: '#/components/schemas/EditTodoStatus'
+              x-body-name: task
+              $ref: '#/components/schemas/EditTaskStatus'
